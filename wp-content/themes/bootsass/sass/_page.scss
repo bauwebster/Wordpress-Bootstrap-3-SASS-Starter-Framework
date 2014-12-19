@@ -1,0 +1,32 @@
+//
+// Page Layout Styles
+// --------------------------------------------------
+
+@import "bootstrap-overrides/variables";
+@import "../assets/bootstrap/stylesheets/mixins";
+
+main {
+	article {
+
+		.entry-header {
+			@include make-sm-column(12);
+		}
+
+		.entry-content {
+			@include make-sm-column(12);
+		}
+
+		.entry-footer {
+			@include make-sm-column(12);
+		}
+
+		> hr {
+			@include make-sm-column(12);
+			margin-top:    $line-height-computed;
+			margin-bottom: $line-height-computed;
+			border: 0;
+			border-top: 1px solid mix($text-color,white,20%);
+		}
+
+	} // article
+} // main
