@@ -5,7 +5,7 @@ Plugin URI: http://halgatewood.com/dashicons-cpt
 Description: Easily select which dashicons you want to use with your custom post types.
 Author: Hal Gatewood
 Author URI: http://www.halgatewood.com
-Version: 1.0.0
+Version: 1.0.1
 
 	FILTERS:
 		dashicons_cpt_types: Allows you to change what types of post types to show
@@ -22,6 +22,7 @@ function dash_cpt_loaded()
 	add_action(	'admin_menu', 'dash_cpt_admin_menu' );
 	add_action( 'admin_enqueue_scripts', 'dash_cpt_admin_js');
 	add_action( 'wp_ajax_dashicon-cpt-save', 'dash_cpt_save_icon_selection' );
+	add_action( 'wp_ajax_dashicon-cpt-remove', 'dash_cpt_remove_icon_selection' );
 }
 add_action( 'plugins_loaded', 'dash_cpt_loaded' );
 
@@ -81,6 +82,16 @@ function dash_cpt_page()
 	$current_icons 		= get_option('dashicons-cpt');
 	
 	require_once( plugin_dir_path( __FILE__ ) . "/dashicons-cpt-page.php" );
+}
+
+
+// AJAX REMOVE OF AN ICON
+
+function dash_cpt_remove_icon_selection()
+{
+	$current_icons = get_option('dashicons-cpt');
+	unset( $current_icons[ $_POST['post_type'] ] );
+	update_option( 'dashicons-cpt', $current_icons );
 }
 
 
